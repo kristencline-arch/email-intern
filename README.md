@@ -37,6 +37,12 @@ python app.py
 ```
 Then open http://127.0.0.1:5000 in Safari (or any browser). You will see a preview table of your recent emails and the planned actions suggested by the AI. No emails are modified yet.
 
+## What is new for junk-heavy inboxes
+- A deterministic junk score (0-100) is now calculated for each message using keywords, sender signals, and promotional patterns.
+- Emails are grouped into **high**, **medium**, and **low/junk** priorities so you can clean low-priority items in bulk.
+- The preview table now explains *why* a message was flagged as junk and suggests actions like `review_for_trash` and `unsubscribe`.
+- If Gmail credentials are missing or invalid, the app now shows a friendly error banner instead of crashing.
+
 ## Future automation (planned)
 The following behaviors are stubbed with TODO comments in the code for later work:
 - Automatically unsubscribe and delete marketing emails.
