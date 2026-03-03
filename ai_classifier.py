@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
-client = OpenAI()
 
 CATEGORIES = [
     "marketing",
@@ -38,6 +37,7 @@ def classify_email(subject: str, sender: str, body: str | None) -> dict[str, Any
         "body": body or "",
     }
     try:
+        client = OpenAI()
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
