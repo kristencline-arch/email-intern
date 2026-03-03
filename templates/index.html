@@ -16,6 +16,8 @@
       .low { background: #2a7e2a; }
       .muted { color: #666; font-size: 0.9rem; }
       .warning { color: #8a3f00; background: #fff2e6; padding: 0.75rem; border: 1px solid #ffd4ad; }
+      .help { margin: 1rem 0; padding: 0.75rem; border: 1px solid #d8e6ff; background: #f4f8ff; }
+      code { background: #f2f2f2; padding: 0.1rem 0.3rem; border-radius: 4px; }
     </style>
   </head>
   <body>
@@ -24,6 +26,15 @@
 
     {% if load_error %}
       <p class="warning">Could not load Gmail messages right now: {{ load_error }}</p>
+      <div class="help">
+        <strong>New here?</strong>
+        <ol>
+          <li>Put <code>credentials.json</code> in this project folder.</li>
+          <li>Run <code>python authorize_gmail_and_calendar.py</code> once.</li>
+          <li>Create a <code>.env</code> file with <code>OPENAI_API_KEY=sk-...</code>.</li>
+          <li>Restart the app with <code>python app.py</code>.</li>
+        </ol>
+      </div>
     {% endif %}
 
     <div class="summary">

@@ -2,6 +2,23 @@
 
 A simple Flask web app that fetches your recent Gmail messages, sends them to the OpenAI API for classification, and previews recommended actions. No email changes are made yet.
 
+## Super quick start (copy/paste)
+If you are new, run these commands exactly in order from the project folder:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env 2>/dev/null || true
+echo "OPENAI_API_KEY=sk-REPLACE_ME" > .env
+python authorize_gmail_and_calendar.py
+python app.py
+```
+
+Then open: http://127.0.0.1:5000
+
+> If `python3` is not found, try `python` instead in every command.
+
 ## Prerequisites
 - Python 3.10+ (works well with pyenv or the system Python on macOS)
 - A Google Cloud project with Gmail and Calendar APIs enabled
@@ -24,6 +41,27 @@ A simple Flask web app that fetches your recent Gmail messages, sends them to th
    ```bash
    OPENAI_API_KEY=sk-...
    ```
+
+## Daily run (after first-time setup)
+```bash
+source .venv/bin/activate
+python app.py
+```
+
+## If you get stuck (common beginner issues)
+- **Error about `credentials.json` not found**
+  - Put `credentials.json` in the project root (same folder as `app.py`).
+- **OAuth/browser auth keeps failing**
+  - Re-run: `python authorize_gmail_and_calendar.py`
+  - Make sure your Google Cloud project has Gmail + Calendar APIs enabled.
+- **OpenAI key error**
+  - Open `.env` and check `OPENAI_API_KEY=...` exists and starts with `sk-`.
+- **`ModuleNotFoundError`**
+  - You probably forgot the virtual environment: `source .venv/bin/activate`
+  - Then run `pip install -r requirements.txt` again.
+- **Page loads but no emails appear**
+  - Confirm you authenticated the same Google account that has inbox messages.
+  - The app only fetches recent messages.
 
 ## Authorize Gmail and Calendar (one time)
 Run the OAuth helper. It will open a browser window and save `token.json` locally for reuse.
